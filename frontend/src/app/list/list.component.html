@@ -1,0 +1,42 @@
+<div class="main-container">
+
+    <div class="show-completed">
+        <input
+            type="checkbox"
+            [(ngModel)]="showDone"
+        />
+        <label>Show done</label>
+    </div>
+    
+    <div class="section-title" *ngIf="showDone">
+        <div>Done</div>
+        <app-item
+            *ngFor="let todo of getDoneTodos()"
+            [todo]="todo"
+        ></app-item>
+    </div>
+    
+    <div class="section-title">Not done</div>
+    <div class="not-completed">
+        <app-item
+            *ngFor="let todo of getNotDoneTodos()"
+            [todo]="todo"
+        ></app-item>
+    </div>
+    
+    <div class="section-title">Add new</div>
+    <div class="add-todo">
+        <input type="text" [(ngModel)]="newTodo" placeholder="Enter a new todo">
+        <button (click)="addTodo()">Add</button>
+    </div>
+    
+    <div class="statistics">
+        <p>Total Todos: {{ todos.length }}</p>
+        <p>Completed Todos: {{ getCompletedTodosCount() }}</p>
+    </div>
+    
+    <div class="clear-completed">
+        <button (click)="clearCompleted()">Clear completed</button>
+    </div>
+    
+</div>

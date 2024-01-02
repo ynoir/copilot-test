@@ -1,0 +1,14 @@
+<div class="todo-item">
+    <div class="todo-title" [class.done]="todo.done">{{ todo.title }}</div>
+
+    <input
+        class="todo-checkbox"
+        type="checkbox"
+        [checked]="todo.done"
+        (change)="onToggle(todo)"
+    />
+
+    <button class="todo-edit" (click)="onEdit(todo)">Edit</button>
+    <button class="todo-delete" (click)="onDelete(todo)">Delete</button>
+
+</div>

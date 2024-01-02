@@ -1,0 +1,26 @@
+<div id="tree-editor" class="tree-editor">
+    <ul id="tree" class="tree">
+        <ng-template #recursiveTree let-nodes let-level="level">
+            <li *ngFor="let node of nodes" class="tree-node" [ngClass]="'level-' + level">
+                <span>{{ node.title }}</span>
+                <button (click)="addChild(node)">add</button>
+                <button (click)="switch(node)">switch</button>
+                <button (click)="delete(node)">delete</button>
+                <button (click)="deleteParent(node)">delete parent</button>
+                <ul *ngIf="node.children.length > 0" class="tree-children">
+                    <ng-container *ngTemplateOutlet="recursiveTree; context:{ $implicit: node.children, level: level + 1 }"></ng-container>
+                </ul>
+            </li>
+        </ng-template>
+
+        <div id="tree-editor" class="tree-editor">
+            <ul id="tree" class="tree">
+                <ng-container *ngTemplateOutlet="recursiveTree; context:{ $implicit: treeData, level: 1 }"></ng-container>
+            </ul>
+        </div>
+    </ul>
+
+    <button (click)="duplicateLeafNodes()">duplicate leaf nodes</button>
+    <button (click)="deleteDuplicateNodes()">delete duplicate nodes</button>
+
+</div>

@@ -1,0 +1,44 @@
+buildscript {
+  ext {
+    nodeVersion = '16.20.0'
+  }
+}
+
+plugins {
+  id "java"
+  id "idea"
+  id 'maven-publish'
+  id "com.github.node-gradle.node" version "3.5.1"
+}
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+}
+
+group = 'org.example'
+
+node {
+  version = nodeVersion
+  download = true
+  nodeProjectDir = file("${project.projectDir}/frontend")
+}
+
+task npxShortcut {
+  dependsOn nodeSetup
+  doLast {
+    def nodeDir = nodeSetup.nodeDir.get()
+    if (System.getProperty('os.name').contains('Windows')) {
+      file("frontend/npx.bat").text = "@echo off\n${nodeDir}\\nodevars.bat && npx.cmd %*\n"
+    } else {
+      file("frontend/npx.sh").text = "PATH=${nodeDir}/bin:\$PATH && ${nodeDir}/bin/npx \"\$@\"\n"
+      project.exec {
+        commandLine "chmod", "+x", "frontend/npx.sh"
+      }
+    }
+  }
+}
+
+tasks.named("nodeSetup") {
+  finalizedBy npxShortcut
+}

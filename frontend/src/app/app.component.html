@@ -1,0 +1,30 @@
+<div class="tabbed-component">
+
+    <ul class="tab-navigation">
+        <li
+            class="tab-item"
+            [class.active]="isTabSelected(0)"
+            data-tab="todo"
+            (click)="selectTab(0)"
+        >
+            Todo
+        </li>
+        <li
+            class="tab-item"
+            [class.active]="isTabSelected(1)"
+            data-tab="todo"
+            (click)="selectTab(1)"
+        >
+            Tree
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane" [class.active]="isTabSelected(0)" data-tab="todo">
+            <app-list></app-list>
+        </div>
+        <div class="tab-pane" [class.active]="isTabSelected(1)" data-tab="second">
+            <app-second></app-second>
+        </div>
+    </div>
+</div>

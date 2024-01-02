@@ -1,0 +1,36 @@
+.done {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-title {
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+.todo-checkbox {
+  margin-right: 10px;
+}
+
+.todo-edit,
+.todo-delete {
+  padding: 5px 10px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+  cursor: pointer;
+}
+
+.todo-edit {
+  margin-right: 5px;
+}
+
+.todo-delete {
+  margin-left: 5px;
+}
